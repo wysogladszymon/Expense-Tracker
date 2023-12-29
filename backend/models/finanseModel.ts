@@ -1,6 +1,5 @@
 import mongoose, { Model } from "mongoose";
 import { IFinanse } from "../types/types";
-import categories from "../data/categories"; 
 
 const Schema = mongoose.Schema;
 
@@ -22,7 +21,6 @@ const finanseSchema = new Schema({
   category:{
     type: String,
     required: true,
-    enum : categories
   }
   // user_id:{
   //   type:String,

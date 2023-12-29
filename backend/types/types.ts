@@ -31,3 +31,7 @@ export interface IUserRequest extends Request {
   category: "expense" | "income";
   user_id: string;
 }
+
+export interface ICategory extends Document {
+  category: string;
+}

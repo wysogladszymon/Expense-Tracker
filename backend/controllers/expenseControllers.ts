@@ -1,8 +1,7 @@
 import { Finanse } from "../models/finanseModel";
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import categories from "../data/categories";
-
+import { categoryExists } from "./categoryController";
 //get all expenses
 export async function showAllExpenses(req: Request, res: Response) {
   //show all expenses and sort them by their date
@@ -43,9 +42,12 @@ export async function createExpense(req: Request, res: Response) {
   let category: string = req.body.category;
   
   category = category && category.toLowerCase();
-  if (category && !categories.includes(category)) {
+
+  if (!category) {
     return res.status(400).json({ error: "Wrong Category" });
   }
+
+  if (!categoryExists(category)) return res.status(400).json({ error: "Category doesn't exist" });
 
   if (emptyFields.length > 0) {
     return res
@@ -77,18 +79,18 @@ export async function deleteExpense(req: Request, res: Response) {
   const expense = await Finanse.findOneAndDelete({ _id: id });
 
   expense
-    ? res.status(200).json({ msg: "Workout deleted succesfully" })
+    ? res.status(200).json({ msg: "Expense deleted succesfully" })
     : res.status(404).json({ error: "No such Expense" });
 }
 
 //update expense
 export async function updateExpense(req: Request, res: Response) {
   const { id } = req.params;
-
+  const category = req.body.categories
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such expense" });
   }
-
+  
   const expense = await Finanse.findByIdAndUpdate(id, { ...req.params });
 
   expense
@@ -100,12 +102,6 @@ export async function updateExpense(req: Request, res: Response) {
 export async function deleteAllExpenses(req: Request, res: Response) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
-  if (mongoose.connection.readyState === 1)
-    console.log("You have been already connected to MongoDB");
-  else {
-    await mongoose.connect(mongoUri);
-    console.log("Connected to dB");
-  }
   try {
     await Finanse.deleteMany({ finanse: "expense" });
     console.log("Expenses deleted succesfully");

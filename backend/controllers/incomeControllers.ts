@@ -1,7 +1,8 @@
 import { Finanse } from "../models/finanseModel";
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import categories from "../data/categories";
+import { Category } from "../models/categoryModel";
+import { categoryExists } from "./categoryController";
 
 //get all incomes
 export async function showAllIncomes(req: Request, res: Response) {
@@ -40,19 +41,16 @@ export async function createIncome(req: Request, res: Response) {
   !title && emptyFields.push("title");
   !amount && emptyFields.push("amount");
 
-  let category: string = req.body.category;
-  
-  category = category && category.toLowerCase();
-  if (category && !categories.includes(category)) {
-    return res.status(400).json({ error: "Wrong Category" });
-  }
-
   if (emptyFields.length > 0) {
     return res
       .status(400)
       .json({ error: "Please fill in all the fields", emptyFields });
   }
+  let category: string = req.body.category;
+  category = category && category.toLowerCase();
 
+  const categoryExists = await Category.find({category});
+  if (!categoryExists) return res.status(400).json({error: "Category not found"});
   //add to dB
   try {
     const income = await Finanse.create({
@@ -77,7 +75,7 @@ export async function deleteIncome(req: Request, res: Response) {
   const income = await Finanse.findOneAndDelete({ _id: id });
 
   income
-    ? res.status(200).json({ msg: "Workout deleted succesfully" })
+    ? res.status(200).json({ msg: "Income deleted succesfully" })
     : res.status(404).json({ error: "No such income" });
 }
 
@@ -88,6 +86,11 @@ export async function updateIncome(req: Request, res: Response) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such income" });
   }
+
+  let category: string = req.body.category;
+  category = category && category.toLowerCase();
+
+  if (category && !categoryExists(category)) return res.status(400).json({error: "Category not found"});
 
   const income = await Finanse.findByIdAndUpdate(id, { ...req.params });
 
@@ -100,12 +103,6 @@ export async function updateIncome(req: Request, res: Response) {
 export async function deleteAllIncomes(req: Request, res: Response) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
-  if (mongoose.connection.readyState === 1)
-    console.log("You have been already connected to MongoDB");
-  else {
-    await mongoose.connect(mongoUri);
-    console.log("Connected to dB");
-  }
   try {
     await Finanse.deleteMany({ finanse: "income" });
     console.log("incomes deleted succesfully");

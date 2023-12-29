@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from "./routes/user";
+import expenseRouter from "./routes/expenseRootes";
+import incomeRouter from "./routes/incomeRootes";
 dotenv.config();
 
 //using express.js
@@ -18,6 +20,8 @@ app.use((req,res,next) => {
 
 //routes
 app.use("/api/auth", authRouter);
+app.use("/api/expense",expenseRouter);
+app.use("/api/income",incomeRouter);
 //app.use...
 
 

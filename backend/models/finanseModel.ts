@@ -1,7 +1,9 @@
 import mongoose, { Model } from "mongoose";
 import { IFinanse } from "../types/types";
+import categories from "../data/categories"; 
 
 const Schema = mongoose.Schema;
+
 
 const finanseSchema = new Schema({
   title: {
@@ -12,15 +14,20 @@ const finanseSchema = new Schema({
     type: Number,
     required: true,
   },
-  category: {
+  finanse: {
     type: String,
     enum: ["expense", "income"],
     required: true,
   },
-  user_id:{
-    type:String,
+  category:{
+    type: String,
     required: true,
+    enum : categories
   }
+  // user_id:{
+  //   type:String,
+  //   required: true,
+  // }
 }, {timestamps: true});
 
 //timestamps is arg that adds date to our database

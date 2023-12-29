@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
+import { IFinanse } from "../types/types";
 
 const Schema = mongoose.Schema;
 
@@ -24,4 +25,4 @@ const finanseSchema = new Schema({
 
 //timestamps is arg that adds date to our database
 
-export const Finanse = mongoose.model('Finanse', finanseSchema);
+export const Finanse: Model<IFinanse> = mongoose.model<IFinanse>('Finanse', finanseSchema);

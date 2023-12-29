@@ -6,6 +6,7 @@ import {
   isValidUsername,
 } from "../validations/userValid";
 import validator from "validator";
+import { IUser, IUserModel } from "../types/types";
 
 const Schema = mongoose.Schema;
 
@@ -26,25 +27,6 @@ const userSchema = new Schema({
   },
 });
 
-export interface IUser {
-  userName: string;
-  email: string;
-  password: string;
-  _id: string;
-}
-
-interface IUserModel extends Model<IUser & Document> {
-  signup(
-    email: string,
-    password: string,
-    userName: string
-  ): Promise<IUser & Document>;
-}
-
-interface IUserModel extends Model<IUser & Document> {
-  login(emailOrUsername: string, password: string): Promise<IUser & Document>;
-}
-
 userSchema.statics.signup = async function (
   email: string,
   password: string,
@@ -56,9 +38,9 @@ userSchema.statics.signup = async function (
   // if (!isEmailValid(email)) throw Error("Wrong Email!");
   if (!validator.isEmail(email)) throw Error("Wrong Email!");
 
-  if (!validator.isStrongPassword(password))
-    throw Error("Your Password is too weak!");
-  // if (!isPasswordValid(password)) throw Error("Your Password is too weak!");
+  // if (!validator.isStrongPassword(password))
+  //   throw Error("Your Password is too weak!");
+  if (!isPasswordValid(password)) throw Error("Your Password is too weak!");
 
   if (!isValidUsername(userName)) throw Error("This Username is forbidden!");
 
@@ -91,9 +73,9 @@ userSchema.statics.login = async function (
   const user = emailOrUsername.includes("@")
     ? await this.findOne({ email: emailOrUsername })
     : await this.findOne({ userName: emailOrUsername });
-  
-  if (!user) throw Error ("User not found");
-  
+
+  if (!user) throw Error("User not found");
+
   const userExists: boolean = await bcrypt.compare(password, user.password);
 
   if (!userExists) throw Error("Wrong Password!");

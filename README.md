@@ -13,7 +13,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 
 ## Instalation
 
-## <h1 id="TechStack>TECH STACK</h1>
+## <h1 id="TechStack">TECH STACK</h1>
 <div display="flex">
 <a href="https://nodejs.org/en" title="Node.js"><img src="https://github.com/get-icon/geticon/blob/master/icons/nodejs-icon.svg" alt="Node.js" width="50px" height="50px"></a> 
 <a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="50px" height="50px"></a>

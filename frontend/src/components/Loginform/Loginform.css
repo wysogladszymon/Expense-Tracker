@@ -1,0 +1,82 @@
+.LoginForm {
+  border: solid #666666 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  background-color: #eee;
+}
+label {
+  width: 100%;
+}
+
+input {
+  all: unset;
+  background-color: #fff;
+  padding: 2px;
+  padding-left: 10px;
+  margin: 0px;
+  height: calc(100% - 4px);
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  margin-right: 20px;
+  margin-top: 15px;
+  margin-bottom: 1px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  background-color: #fff;
+}
+
+.eye:hover {
+  cursor: pointer;
+}
+
+.password,
+.email {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 30px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.password:focus-within,
+.email:focus-within {
+  border: solid black 1px;
+}
+
+button {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  align-self: center;
+  border-radius: 4px;
+  border: solid 1px black;
+  text-align: center;
+  transform: translateY(0px);
+  transition: transform 0.2s ease-in-out;
+  background-color: #ddd;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  transition: transform 0.2s ease-in-out;
+}

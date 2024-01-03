@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 //create user category
 export async function createCategory(req: Request, res: Response) {
+  console.log(req.body.category);
+  
   const category: string = req.body.category.toLowerCase();
 
   if (!category) return res.status(400).json({ error: "Invalid Category" });

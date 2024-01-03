@@ -43,10 +43,6 @@ export async function createExpense(req: Request, res: Response) {
   
   category = category && category.toLowerCase();
 
-  if (!category) {
-    return res.status(400).json({ error: "Wrong Category" });
-  }
-
   if (!categoryExists(category)) return res.status(400).json({ error: "Category doesn't exist" });
 
   if (emptyFields.length > 0) {

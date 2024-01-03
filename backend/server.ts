@@ -29,6 +29,7 @@ app.use("/api/categories", categoriesRouter);
 
 //connect to db
 const arg: string = process.env.MONGO_URI as string;
+
 mongoose
   .connect(arg)
   .then(() => {

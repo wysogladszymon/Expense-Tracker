@@ -33,7 +33,7 @@ export const Signupform: FC<LayoutProps> = () => {
       className="border-solid border-2 border-gray-600 relative flex flex-col max-w-96 mx-auto bg-slate-50 rounded-s rounded-e"
       onSubmit={handleSubmit}
     >
-      <h1 className="pl-6 pb-4 border-0 border-b-2  w-full pt-4 text-2xl bg-gray-300">
+      <h1 className="pl-6 pb-4 border-0 border-b-2 border-gray-600 w-full pt-4 text-2xl bg-gray-300">
         Login User
       </h1>
       <label className="ml-6 mt-3">Email adress</label>

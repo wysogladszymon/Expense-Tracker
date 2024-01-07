@@ -20,4 +20,5 @@ This application manages us to track our expenses and incomes. I decided to use 
 <a href="https://www.typescriptlang.org/" title="Typescript"><img src="https://github.com/get-icon/geticon/raw/master/icons/typescript-icon.svg" alt="Typescript" width="50px" height="50px"></a> 
 <a href="https://www.mongodb.com" title="MongoDB"><img src="https://github.com/get-icon/geticon/blob/master/icons/mongodb-icon.svg" alt="MongoDB" width="50px" height="50px"></a> 
 <a href="https://expressjs.com" title="Express.js"><img src="https://github.com/get-icon/geticon/blob/master/icons/express.svg" alt="Express.js" height="50px"></a>
+<a href="https://tailwindcss.com" title="Tailwindcss"><img src="https://github.com/get-icon/geticon/raw/master/icons/tailwindcss-icon.svg" alt="Tailwind CSS" height="50px"></a>
 </div>

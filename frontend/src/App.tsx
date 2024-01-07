@@ -1,13 +1,13 @@
-import {Loginform, Signupform} from "./components";
+import { Loginform, Signupform } from "./components";
+import { ThemeContextProvider } from "./store/ThemeContext";
 
 function App() {
-
   return (
-    <>
-    <Loginform/>
-    <Signupform/>
-    </>
-  )
+    <ThemeContextProvider>
+      <Loginform />
+      <Signupform />
+    </ThemeContextProvider>
+  );
 }
 
-export default App
+export default App;

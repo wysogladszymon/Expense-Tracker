@@ -1,5 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { useThemeContext, ThemeType } from "../store/ThemeContext";
+
 
 interface LayoutProps {}
 
@@ -25,13 +27,16 @@ export const Loginform: FC<LayoutProps> = () => {
       id="togglePassword"
     ></VscEyeClosed>
   );
+  //have to finish
   const handleSubmit = () => {};
+
   return (
+    <>
     <form
       className="border-solid border-2 border-gray-600 relative flex flex-col max-w-96 mx-auto bg-slate-50 rounded-s rounded-e"
       onSubmit={handleSubmit}
     >
-      <h1 className="pl-6 pb-4 border-0 border-b-2  w-full pt-4 text-2xl bg-gray-300">Login User</h1>
+      <h1 className="pl-6 pb-4 border-0 border-b-2 border-gray-600 w-full pt-4 text-2xl bg-gray-300">Login User</h1>
       <label className='ml-6 mt-3'>Username or email adress</label>
       <input
         className=" bg-white p-2 h-full box-border mr-6 ml-6 flex justify-center overflow-hidden relative mt-2 mb-3  border-2 border-solid border-gray-300 rounded-s rounded-e"
@@ -56,5 +61,6 @@ export const Loginform: FC<LayoutProps> = () => {
       </div>
         <button className="mb-5 clear w-24 h-10 self-center border-solid border-slate-200 border-2 hover:-translate-y-1 rounded-s rounded-e transition ease-in-out duration-300 hover:cursor-pointer hover:transition-transform hover:duration-300 hover:ease-in-out hover:border-slate-300 ">Log in</button>
     </form>
+    </>
   );
 };

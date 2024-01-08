@@ -5,14 +5,15 @@ import {
   Dispatch,
   FC,
   useReducer,
-  useEffect,
 } from "react";
 
 export interface Theme {
-  primary: string;
-  secondary: string;
-  background: string;
-  font: string;
+  container: string,
+  button: string,
+  input: string,
+  header: string,
+  label:string,
+  background:string,
 }
 
 export enum ThemeType {
@@ -28,16 +29,20 @@ export interface ThemeContextInterface {
 
 export const themes: Record<ThemeType, Theme> = {
   light: {
-    primary: "#b0bec5",
-    secondary: "#ffccbc",
-    background: "#fafafa",
-    font: "#546e7a",
+    container: "border-gray-600 bg-slate-50 ",
+    button: "border-slate-200 hover:border-slate-300 text-black",
+    input: " bg-white border-gray-300 text-black",
+    header: "border-gray-600 bg-gray-300 text-black",
+    label: 'text-black',
+    background: 'bg-gray-100',
   },
   dark: {
-    primary: "#546e7a",
-    secondary: "#d84315",
-    background: "#263238",
-    font: "#eceff1",
+    container: "border-black bg-gray-800 ",
+    button: "border-gray-700 hover:border-gray-600 text-white",
+    input: "bg-gray-900 border-gray-700 text-white",
+    header: "border-black bg-gray-700 text-white",
+    label: 'text-white',
+    background:'bg-gray-600',
   },
 };
 

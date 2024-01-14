@@ -24,8 +24,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/expense",expenseRouter);
 app.use("/api/income",incomeRouter);
 app.use("/api/categories", categoriesRouter);
-//app.use...
-
 
 //connect to db
 const arg: string = process.env.MONGO_URI as string;

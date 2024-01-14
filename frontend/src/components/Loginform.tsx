@@ -20,14 +20,14 @@ export const Loginform: FC<LayoutProps> = () => {
   const eye = isPasswordVisible ? (
     <VscEye
       className={eyeStyles}
-      color={theme == ThemeType.Dark ? "black" : "white"}
+      color={theme == ThemeType.Light ? "black" : "white"}
       onClick={handleClick}
       id="togglePassword"
     ></VscEye>
   ) : (
     <VscEyeClosed
       className={eyeStyles}
-      color={theme == ThemeType.Dark ? "black" : "white"}
+      color={theme == ThemeType.Light ? "black" : "white"}
       onClick={handleClick}
       id="togglePassword"
     ></VscEyeClosed>

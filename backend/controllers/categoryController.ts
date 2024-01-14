@@ -96,3 +96,5 @@ export async function deleteDefaultCategories(req: Request, res: Response) {
     throw Error(error.message);
   }
 }
+
+

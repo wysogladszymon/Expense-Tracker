@@ -1,5 +1,5 @@
 import express from "express";
-import { updateUser, loginUser, signupUser, deleteUser, clearAllUsers } from "../controllers/authFunctions";
+import { updateUser, loginUser, signupUser, deleteUser, clearAllUsers, showAllUsers } from "../controllers/authFunctions";
 
 const router = express.Router();
 
@@ -18,4 +18,6 @@ router.patch('/:id', updateUser);
 //delete all => for testing purposes
 router.delete('/', clearAllUsers);
 
+//get all users for testing
+router.get('/',showAllUsers);
 export default router;

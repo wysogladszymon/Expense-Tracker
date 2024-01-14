@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { ThemeType, useThemeContext } from "../store/ThemeContext";
+import {useRegister} from "../store/useRegister.tsx"
 
 interface LayoutProps {}
 
@@ -9,6 +10,10 @@ export const Signupform: FC<LayoutProps> = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const {register, isLoading, error} = useRegister();
+
+  
+
   const handleClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -21,21 +26,29 @@ export const Signupform: FC<LayoutProps> = () => {
   const eye = isPasswordVisible ? (
     <VscEye
       className={eyeStyles}
-      color={theme == ThemeType.Dark ? "black" : "white"}
+      color={theme == ThemeType.Light ? "black" : "white"}
       onClick={handleClick}
       id="togglePassword"
     ></VscEye>
   ) : (
     <VscEyeClosed
       className={eyeStyles}
-      color={theme == ThemeType.Dark ? "black" : "white"}
+      color={theme == ThemeType.Light ? "black" : "white"}
       onClick={handleClick}
       id="togglePassword"
     ></VscEyeClosed>
   );
 
   //have to finish
-  const handleSubmit = () => {};
+  const handleSubmit = (e : any) => {
+
+    e.preventDefault()
+
+    console.log(username,email,password);
+    
+    register(username, email,password);    
+
+  };
 
   return (
     <form
@@ -81,8 +94,10 @@ export const Signupform: FC<LayoutProps> = () => {
       <button
         className={`clear mb-5 w-24 h-10 self-center border-solid  border-2 hover:-translate-y-1 rounded-s rounded-e transition ease-in-out duration-300 hover:cursor-pointer hover:transition-transform hover:duration-300 hover:ease-in-out  ${specifies.button}`}
       >
-        Log in
+        Sign Up
       </button>
+      {isLoading ? 1 : 0}
+      {error}
     </form>
   );
 };

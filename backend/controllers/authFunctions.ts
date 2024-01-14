@@ -13,16 +13,18 @@ function createToken(_id: string) {
 //signs up user
 export async function signupUser(req: Request, res: Response) {
   console.log("signup");
-  const { email, password, userName } = req.body;
+  const { email, password, username } = req.body;
 
   try {
     //add send to database ande respond it
-    const user = await User.signup(email, password, userName);
+    const user = await User.signup(email, password, username);
 
     const token = createToken(user._id);
     res.status(200).json({ email, token });
   } catch (error: any) {
-    return res.status(404).json({ msg: error.message });
+    console.log(error.message);
+    // throw error;
+    res.status(400).json({ message: error.message });
   }
 }
 
@@ -36,7 +38,7 @@ export async function loginUser(req: Request, res: Response) {
     const token = createToken(user._id);
     res.status(200).json({ email: user.email, token: token });
   } catch (error: any) {
-    return res.status(404).json({ msg: error.message });
+    return res.status(400).json({ msg: error.message });
   }
 }
 
@@ -51,24 +53,31 @@ export async function updateUser(req: Request, res: Response) {
 }
 
 //clear all collections => required in testing
-export async function clearAllUsers(req:Request, res:Response) {
+export async function clearAllUsers(req: Request, res: Response) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
-  if (mongoose.connection.readyState === 1)
-    console.log('Connected to MongoDB');  
-  else{
+  if (mongoose.connection.readyState === 1) console.log("Connected to MongoDB");
+  else {
     await mongoose.connect(mongoUri);
-    console.log('Connecting... and connected to dB');
+    console.log("Connecting... and connected to dB");
   }
   //if we are finally connected
-  try{
+  try {
     await User.deleteMany({});
-    console.log('Users deleted succesfully');
-    res.status(400).json({"msg":'Users deleted succesfully'});
-  }
-  catch (error:any){
-    console.log('Failed to delete all Users');
+    console.log("Users deleted succesfully");
+    res.status(400).json({ msg: "Users deleted succesfully" });
+  } catch (error: any) {
+    console.log("Failed to delete all Users");
     throw Error(error.message);
   }
- 
+}
+
+//get all users
+export async function showAllUsers(req: Request, res: Response) {
+  //show all Users and sort them by alphabet
+  const users = await User.find({}).sort({
+    email: 1,
+  });
+
+  res.status(200).json(users);
 }

@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { useAuthContext } from "./AuthContext";
 
-interface useRegisterInterface {
-  register: (
-    username: string,
-    email: string,
-    password: string
-  ) => Promise<void>;
+interface useLoginInterface {
+  login: (emailOrUsername: string, password: string) => Promise<void>;
   isLoading: boolean;
   error: string;
 }
@@ -15,35 +11,30 @@ interface CustomJson {
   token: string;
 }
 interface Message {
-  message:string
+  message: string;
 }
 
-export const useRegister: () => useRegisterInterface = () => {
+export const useLogin: () => useLoginInterface = () => {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const { dispatchLogin } = useAuthContext();
 
-  const register = async (
-    username: string,
-    email: string,
-    password: string
-  ) => {
+  const login = async (emailOrUsername: string, password: string) => {
     setIsLoading(true);
     setError("");
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ emailOrUsername, password }),
       });
 
-      const json : CustomJson | Message= await response.json();
+      const json: CustomJson | Message = await response.json();
 
-      if (!response.ok ) {
+      if (!response.ok) {
         setIsLoading(false);
-        if('message' in json){
-          console.log(json.message);
+        if ("message" in json) {
           setError(json.message);
           throw Error(json.message);
         }
@@ -51,7 +42,11 @@ export const useRegister: () => useRegisterInterface = () => {
         // save the user to local storage
         localStorage.setItem("user", JSON.stringify(json));
         // update the auth context
-        'message' in json || dispatchLogin({ type: "LOGIN", payload: {email:json.email, token:json.token} });
+        "message" in json ||
+          dispatchLogin({
+            type: "LOGIN",
+            payload: { email: json.email, token: json.token },
+          });
         // update loading state
         setIsLoading(false);
       }
@@ -60,5 +55,5 @@ export const useRegister: () => useRegisterInterface = () => {
       throw Error(error.message);
     }
   };
-  return { register, isLoading, error };
+  return { login, isLoading, error };
 };

@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { ThemeType, useThemeContext } from "../store/ThemeContext";
-import {useRegister} from "../store/useRegister.tsx"
+import { useRegister } from "../store/useRegister.tsx";
+import { Error } from "./";
 
 interface LayoutProps {}
 
@@ -10,9 +11,7 @@ export const Signupform: FC<LayoutProps> = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const {register, isLoading, error} = useRegister();
-
-  
+  const { register, isLoading, error } = useRegister();
 
   const handleClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -39,15 +38,18 @@ export const Signupform: FC<LayoutProps> = () => {
     ></VscEyeClosed>
   );
 
-  //have to finish
-  const handleSubmit = (e : any) => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-    e.preventDefault()
-
-    console.log(username,email,password);
-    
-    register(username, email,password);    
-
+    try{
+      await register(username, email, password);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+    }
+    catch(err : any){
+      console.log(err.message);
+    }
   };
 
   return (
@@ -91,13 +93,17 @@ export const Signupform: FC<LayoutProps> = () => {
         ></input>{" "}
         {eye}
       </div>
+      <Error
+        theme={theme}
+        className="justify-center mb-4 text-center self-center"
+      >
+        {!error ? <br /> : error}
+      </Error>
       <button
         className={`clear mb-5 w-24 h-10 self-center border-solid  border-2 hover:-translate-y-1 rounded-s rounded-e transition ease-in-out duration-300 hover:cursor-pointer hover:transition-transform hover:duration-300 hover:ease-in-out  ${specifies.button}`}
       >
         Sign Up
       </button>
-      {isLoading ? 1 : 0}
-      {error}
     </form>
   );
 };

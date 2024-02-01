@@ -38,7 +38,7 @@ export async function loginUser(req: Request, res: Response) {
     const token = createToken(user._id);
     res.status(200).json({ email: user.email, token: token });
   } catch (error: any) {
-    return res.status(400).json({ msg: error.message });
+    return res.status(400).json({ message: error.message });
   }
 }
 

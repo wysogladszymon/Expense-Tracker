@@ -1,6 +1,9 @@
 import { FC, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { ThemeType, useThemeContext } from "../store/ThemeContext";
+import { useLogin } from "../store/useLogin";
+import { Error } from "./";
+
 
 interface LayoutProps {}
 
@@ -8,6 +11,8 @@ export const Loginform: FC<LayoutProps> = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {login, isLoading, error} = useLogin();
+
   const handleClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -33,8 +38,19 @@ export const Loginform: FC<LayoutProps> = () => {
     ></VscEyeClosed>
   );
   //have to finish
-  const handleSubmit = () => {};
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
+    try{
+      await login(email, password);
+      setEmail("");
+      setPassword("");
+    }
+    catch(err : any){
+      console.log(err.message);
+      return;
+    }
+  };
   return (
     <>
       <form
@@ -70,6 +86,12 @@ export const Loginform: FC<LayoutProps> = () => {
           ></input>{" "}
           {eye}
         </div>
+        <Error
+        theme={theme}
+        className="justify-center mb-4 text-center self-center"
+      >
+        {!error ? <br /> : error}
+      </Error>
         <button
           className={`clear mb-5 w-24 h-10 self-center border-solid  border-2 hover:-translate-y-1 rounded-s rounded-e transition ease-in-out duration-300 hover:cursor-pointer hover:transition-transform hover:duration-300 hover:ease-in-out  ${specifies.button}`}
         >

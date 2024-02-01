@@ -24,10 +24,10 @@ export const Navbar: FC<NavbarProps> = ({ pageName }) => {
   const click = () => {
     switch (userButton) {
       case "Login":
-        navigate(`/${userButton.toLowerCase()}`);
+        navigate(`/login`);
         break;
       case "Signup":
-        navigate(`/${userButton.toLowerCase()}`);
+        navigate(`/signup`);
         break;
       case "Logout":
         dispatchLogin({ type: "LOGOUT", payload: null });
@@ -44,8 +44,14 @@ export const Navbar: FC<NavbarProps> = ({ pageName }) => {
       <h1 className=" flex-grow justify-self-start">{pageName}</h1>
       {user && <p className="ml-auto text-xs">{user.email}</p>}
       <button
-        onClick={click}
+        onClick={() => navigate('/')}
         className={`w-24 h-10 border-solid border-2 rounded-s rounded-e transition-all ease-in-out duration-300 hover:cursor-pointer ml-5 ${button}`}
+      >
+        Home
+      </button>
+      <button
+        onClick={click}
+        className={`w-24 h-10 border-solid border-2 rounded-s rounded-e transition-all ease-in-out duration-300 hover:cursor-pointer ml-2 ${button}`}
       >
         {userButton}
       </button>

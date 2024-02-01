@@ -3,6 +3,7 @@ import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { ThemeType, useThemeContext } from "../store/ThemeContext";
 import { useLogin } from "../store/useLogin";
 import { Error } from "./";
+import { useNavigate } from "react-router-dom";
 
 
 interface LayoutProps {}
@@ -12,6 +13,8 @@ export const Loginform: FC<LayoutProps> = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const {login, isLoading, error} = useLogin();
+  const navigate = useNavigate();
+
 
   const handleClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -45,6 +48,7 @@ export const Loginform: FC<LayoutProps> = () => {
       await login(email, password);
       setEmail("");
       setPassword("");
+      navigate('/');
     }
     catch(err : any){
       console.log(err.message);

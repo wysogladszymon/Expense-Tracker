@@ -30,7 +30,7 @@ export interface ThemeContextInterface {
 export const themes: Record<ThemeType, Theme> = {
   light: {
     container: "border-gray-600 bg-slate-50 ",
-    button: "border-slate-300 hover:border-slate-400 text-black ",
+    button: "border-gray-300 hover:border-slate-400 text-black ",
     input: " bg-white border-gray-300 text-black",
     header: "border-gray-600 bg-gray-300 text-black",
     label: 'text-black',

@@ -13,6 +13,9 @@ export const Home: FC<HomeProps> = () => {
       className={`w-screen h-screen transition-colors duration-200  ${background}`}
     >
       <Navbar pageName="Home Page" />
+      login: admin
+      <br />
+      password: ABCabc123!
     </div>
   );
 };

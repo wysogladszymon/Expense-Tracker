@@ -8,25 +8,26 @@ export async function createCategory(req: MyRequest, res: MyResponse) {
   const { user } = req;
   const category: string = req.body.category.toLowerCase();
 
-  if (!category) return res.status(400).json({ error: "Invalid Category" });
+  if (!category) return res.status(400).json({ message: "Invalid Category" });
 
   const find = categoryExists(category);
-  if (!find) return res.status(400).json({ error: "Category already exists" });
+  if (!find) return res.status(400).json({ message: "Category already exists" });
 
-  const response = await Category.create({ category, user: "user" });
+  const response = await Category.create({ category, user: "user", user_id:user });
   response
     ? res.status(200).json(response)
-    : res.status(400).json({ error: "Invalid Category" });
+    : res.status(400).json({ message: "Invalid Category" });
 }
 
 //delete all user categories
 export async function deleteAllCategories(req: MyRequest, res: MyResponse) {
   const mongoUri: string = process.env.MONGO_URI as string;
+  const {user} = req;
 
   try {
-    await Category.deleteMany({ user: "user" });
+    await Category.deleteMany({ user: "user",user_id:user });
     console.log("Categories deleted succesfully");
-    res.status(400).json({ msg: "Categories deleted succesfully" });
+    res.status(400).json({ message: "Categories deleted succesfully" });
   } catch (error: any) {
     console.log("Failed to delete all Categories");
     throw Error(error.message);
@@ -35,16 +36,17 @@ export async function deleteAllCategories(req: MyRequest, res: MyResponse) {
 
 //delete Category
 export async function deleteCategory(req: MyRequest, res: MyResponse) {
+  const {user} = req;
   const category: string = req.body.category.toLowerCase();
 
   if (!mongoose.Types.ObjectId.isValid(category)) {
-    return res.status(404).json({ error: "No such Category" });
+    return res.status(404).json({ message: "No such Category" });
   }
-  const cat = await Category.findOneAndDelete({ category, user: "user" });
+  const cat = await Category.findOneAndDelete({ category,user_id:user, user: "user" });
 
   cat
-    ? res.status(200).json({ msg: "Workout deleted succesfully" })
-    : res.status(404).json({ error: "No such Category" });
+    ? res.status(200).json({ message: "Workout deleted succesfully" })
+    : res.status(404).json({ message: "No such Category" });
 }
 
 //get categories
@@ -72,10 +74,10 @@ export async function categoryExists(
   let cat: Array<Object> = [];
 
   if (user_id) cat = await Category.find({ category, user_id: user_id });
-  const def = await Category.find({ user: "default" });
+  const def = await Category.find({ category, user: "default" });
   cat = [...cat, ...def];
-  const categoryExists = cat ? true : false;
-  return categoryExists;
+
+  return cat ? true : false;
 }
 
 //------------------------------admin functions------------------------------------------
@@ -84,15 +86,15 @@ export async function categoryExists(
 export async function createDefaultCategory(req: MyRequest, res: MyResponse) {
   const category: string = req.body.category.toLowerCase();
 
-  if (!category) return res.status(400).json({ error: "Invalid Category" });
+  if (!category) return res.status(400).json({ message: "Invalid Category" });
 
   const find = categoryExists(category);
-  if (!find) return res.status(400).json({ error: "Category already exists" });
+  if (!find) return res.status(400).json({ message: "Category already exists" });
 
   const response = await Category.create({ category, user: "default",user_id:'default' });
   response
     ? res.status(200).json(response)
-    : res.status(400).json({ error: "Invalid Category" });
+    : res.status(400).json({ message: "Invalid Category" });
 }
 
 //delete all admin categories
@@ -102,7 +104,7 @@ export async function deleteDefaultCategories(req: MyRequest, res: MyResponse) {
   try {
     await Category.deleteMany({ user: "default" });
     console.log("Categories deleted succesfully");
-    res.status(400).json({ msg: "Categories deleted succesfully" });
+    res.status(400).json({ message: "Categories deleted succesfully" });
   } catch (error: any) {
     console.log("Failed to delete all Categories");
     throw Error(error.message);

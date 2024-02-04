@@ -24,7 +24,7 @@ export enum ThemeType {
 export interface ThemeContextInterface {
   theme: ThemeType;
   specifies: Theme;
-  dispatch: Dispatch<ActionInterface>;
+  dispatchTheme: Dispatch<ActionInterface>;
 }
 
 export const themes: Record<ThemeType, Theme> = {
@@ -59,7 +59,7 @@ export interface StateInterface {
 export const ThemeContext = createContext({
   theme: "light",
   specifies: themes.light,
-  dispatch: () => {},
+  dispatchTheme: () => {},
 } as ThemeContextInterface);
 
 //reducer for our theme change
@@ -91,9 +91,9 @@ export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({
     specifies: themes.light,
   };
   //using useReducer (i know that in this useState will be more appropriate, but I need to practice this hook)
-  const [state, dispatch] = useReducer(themeReducer, initialState);
+  const [state, dispatchTheme] = useReducer(themeReducer, initialState);
   return (
-    <ThemeContext.Provider value={{ ...state, dispatch }}>
+    <ThemeContext.Provider value={{ ...state, dispatchTheme }}>
       {children}
     </ThemeContext.Provider>
   );

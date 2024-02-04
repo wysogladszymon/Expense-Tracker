@@ -28,11 +28,13 @@ export default router;
 
 
 export async function requireAuth(req: MyRequest, res: MyResponse, next: NextFunction){
-    const { authorization }: { authorization?: string } = req.headers;
-    const token: string | undefined = authorization && authorization.split(' ')[1];
-    console.log(token);
+    console.log(req);
     
-    console.log("Teraz stworzony token:  ", createToken("65bc04ca32795f4e3cd5ef4b"));
+    const { authorization } = req.headers;
+    console.log("auth: " ,authorization);
+    
+    const token: string | undefined = authorization && authorization.split(' ')[1];
+    console.log("token:" ,token);
     
 
     try{

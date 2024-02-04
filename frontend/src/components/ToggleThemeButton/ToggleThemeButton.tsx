@@ -8,11 +8,11 @@ interface ToggleThemeButtonProps {
 }
 
 export const ToggleThemeButton: FC<ToggleThemeButtonProps> = ({className}) => {
-  const { theme, dispatch } = useThemeContext();
+  const { theme, dispatchTheme } = useThemeContext();
 
-  const handleClick = () => {
-    if (theme == ThemeType.Light) dispatch({ type: ThemeType.Dark });
-    else dispatch({ type: ThemeType.Light });
+  const handleClickTheme = () => {
+    if (theme == ThemeType.Light) dispatchTheme({ type: ThemeType.Dark });
+    else dispatchTheme({ type: ThemeType.Light });
   };
 
   const buttoncolor = theme == ThemeType.Light ?  'bg-gray-400': 'bg-gray-800';
@@ -24,7 +24,7 @@ export const ToggleThemeButton: FC<ToggleThemeButtonProps> = ({className}) => {
       <label htmlFor={check} className={` ${button} ${buttoncolor}`}>
         <input
           type="checkbox"
-          onClick={handleClick}
+          onClick={handleClickTheme}
           id={check}
         />
         <FaSun className={sun} />

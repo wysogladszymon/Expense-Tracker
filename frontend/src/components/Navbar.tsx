@@ -19,7 +19,6 @@ export const Navbar: FC<NavbarProps> = ({ pageName }) => {
   } else {
     userButton = pageName === "Login Page" ? "Signup" : "Login";
   }
-  console.log(userButton);
 
   const click = () => {
     switch (userButton) {

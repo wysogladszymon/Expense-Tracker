@@ -16,9 +16,9 @@ router.get('/', showAllCategories);
 
 //---------------------admin functions-------------------------------
 //add default category
-router.get('/adminadd',createDefaultCategory);
+router.post('/adminadd',createDefaultCategory);
 
 //delete user categories
-router.get('admindelete',deleteDefaultCategories);
+router.delete('/admindelete',deleteDefaultCategories);
 
 export default router;

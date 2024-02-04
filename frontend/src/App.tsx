@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Route,Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route,Routes, Navigate } from "react-router-dom";
 import {Home, SignupPage, LoginPage} from "./pages";
 import { useAuthContext } from "./store/AuthContext";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
+import { Notlogged } from "./pages/Notlogged";
 
 function App() {
   const {user, dispatchLogin} = useAuthContext();
@@ -17,9 +18,10 @@ function App() {
   return (
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/signup" element={user ? <Home/> : <SignupPage />} />
-          <Route path="/login" element={user ? <Home/> : <LoginPage />} />
+          <Route path="/" element={user ? <Home/> : <Navigate to="/notlogged"/>} />
+          <Route path="/notlogged" element={user ? <Navigate to="/"/> : <Notlogged/>} />
+          <Route path="/signup" element={user ? <Navigate to="/"/> : <SignupPage />} />
+          <Route path="/login" element={user ? <Navigate to="/"/> : <LoginPage />} />
         </Routes>
       </Router>
   );

@@ -1,11 +1,16 @@
 import { Finanse } from "../models/finanseModel";
-import { Request, Response } from "express";
+import { MyRequest, MyResponse } from "../types/Requests";
+
 import mongoose from "mongoose";
 import { categoryExists } from "./categoryController";
 //get all expenses
-export async function showAllExpenses(req: Request, res: Response) {
+export async function showAllExpenses(req: MyRequest, res: MyResponse) {
+  const { user } = req;
   //show all expenses and sort them by their date
-  const expenses = await Finanse.find({ finanse: "expense" }).sort({
+  const expenses = await Finanse.find({
+    user_id: user,
+    finanse: "expense",
+  }).sort({
     createdAt: -1,
   });
 
@@ -13,23 +18,25 @@ export async function showAllExpenses(req: Request, res: Response) {
 }
 
 //get a single expense
-export async function showExpense(req: Request, res: Response) {
+export async function showExpense(req: MyRequest, res: MyResponse) {
   //get id from req.params (from the path)
   const { id } = req.params;
 
+  const { user } = req;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such Expense" });
   }
-
-  const expense = await Finanse.findById(id);
-
+  
+  const expense = await Finanse.find({_id:id, user_id:user})
   expense
     ? res.status(200).json(expense)
     : res.status(400).json({ error: "No such Expense" });
 }
 
 //create expense
-export async function createExpense(req: Request, res: Response) {
+export async function createExpense(req: MyRequest, res: MyResponse) {
+  const { user } = req;
+
   //get attributes send in json
   console.log("Create Expense");
   const { title, amount } = req.body;
@@ -40,10 +47,11 @@ export async function createExpense(req: Request, res: Response) {
   !amount && emptyFields.push("amount");
 
   let category: string = req.body.category;
-  
+
   category = category && category.toLowerCase();
 
-  if (!categoryExists(category)) return res.status(400).json({ error: "Category doesn't exist" });
+  if (!categoryExists(category))
+    return res.status(400).json({ error: "Category doesn't exist" });
 
   if (emptyFields.length > 0) {
     return res
@@ -66,7 +74,7 @@ export async function createExpense(req: Request, res: Response) {
 }
 
 //delete expense
-export async function deleteExpense(req: Request, res: Response) {
+export async function deleteExpense(req: MyRequest, res: MyResponse) {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -80,13 +88,13 @@ export async function deleteExpense(req: Request, res: Response) {
 }
 
 //update expense
-export async function updateExpense(req: Request, res: Response) {
+export async function updateExpense(req: MyRequest, res: MyResponse) {
   const { id } = req.params;
-  const category = req.body.categories
+  const category = req.body.categories;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such expense" });
   }
-  
+
   const expense = await Finanse.findByIdAndUpdate(id, { ...req.params });
 
   expense
@@ -95,7 +103,7 @@ export async function updateExpense(req: Request, res: Response) {
 }
 
 //delete all expenses
-export async function deleteAllExpenses(req: Request, res: Response) {
+export async function deleteAllExpenses(req: MyRequest, res: MyResponse) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
   try {

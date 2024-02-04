@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import authRouter from "./routes/user";
+import authRouter, {requireAuth} from "./routes/user";
 import expenseRouter from "./routes/expenseRootes";
 import incomeRouter from "./routes/incomeRootes";
 import categoriesRouter from "./routes/categoriesRoutes";
@@ -21,6 +21,11 @@ app.use((req,res,next) => {
 
 //routes
 app.use("/api/auth", authRouter);
+
+//middleware to check if user is logged
+app.use(requireAuth)
+
+//middleware for user's data
 app.use("/api/expense",expenseRouter);
 app.use("/api/income",incomeRouter);
 app.use("/api/categories", categoriesRouter);

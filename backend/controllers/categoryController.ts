@@ -1,11 +1,11 @@
 import { Category } from "../models/categoryModel";
-import { Request, Response } from "express";
 import mongoose from "mongoose";
+import { MyRequest, MyResponse } from "../types/Requests";
 
 //create user category
-export async function createCategory(req: Request, res: Response) {
+export async function createCategory(req: MyRequest, res: MyResponse) {
   console.log(req.body.category);
-  
+  const { user } = req;
   const category: string = req.body.category.toLowerCase();
 
   if (!category) return res.status(400).json({ error: "Invalid Category" });
@@ -20,7 +20,7 @@ export async function createCategory(req: Request, res: Response) {
 }
 
 //delete all user categories
-export async function deleteAllCategories(req: Request, res: Response) {
+export async function deleteAllCategories(req: MyRequest, res: MyResponse) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
   try {
@@ -34,7 +34,7 @@ export async function deleteAllCategories(req: Request, res: Response) {
 }
 
 //delete Category
-export async function deleteCategory(req: Request, res: Response) {
+export async function deleteCategory(req: MyRequest, res: MyResponse) {
   const category: string = req.body.category.toLowerCase();
 
   if (!mongoose.Types.ObjectId.isValid(category)) {
@@ -48,20 +48,32 @@ export async function deleteCategory(req: Request, res: Response) {
 }
 
 //get categories
-export async function showAllCategories(req: Request, res: Response) {
+export async function showAllCategories(req: MyRequest, res: MyResponse) {
+  const { user } = req;
+
   //show all categories and sort them by alphabet
-  const cats = await Category.find({}).sort({
+  const cats = await Category.find({ user_id: user }).sort({
+    user: 1,
+    category: 1,
+  });
+  const defs = await Category.find({ user: "default" }).sort({
     user: 1,
     category: 1,
   });
 
-  res.status(200).json(cats);
+  res.status(200).json([...defs, ...cats]);
 }
 
-export async function categoryExists(category: string): Promise<boolean> {
+export async function categoryExists(
+  category: string,
+  user_id: string = ""
+): Promise<boolean> {
   category = category && category.toLowerCase();
+  let cat: Array<Object> = [];
 
-  const cat = await Category.find({ category });
+  if (user_id) cat = await Category.find({ category, user_id: user_id });
+  const def = await Category.find({ user: "default" });
+  cat = [...cat, ...def];
   const categoryExists = cat ? true : false;
   return categoryExists;
 }
@@ -69,7 +81,7 @@ export async function categoryExists(category: string): Promise<boolean> {
 //------------------------------admin functions------------------------------------------
 
 //create Default Category => for admin only for test purposes
-export async function createDefaultCategory(req: Request, res: Response) {
+export async function createDefaultCategory(req: MyRequest, res: MyResponse) {
   const category: string = req.body.category.toLowerCase();
 
   if (!category) return res.status(400).json({ error: "Invalid Category" });
@@ -77,14 +89,14 @@ export async function createDefaultCategory(req: Request, res: Response) {
   const find = categoryExists(category);
   if (!find) return res.status(400).json({ error: "Category already exists" });
 
-  const response = await Category.create({ category, user: "default" });
+  const response = await Category.create({ category, user: "default",user_id:'default' });
   response
     ? res.status(200).json(response)
     : res.status(400).json({ error: "Invalid Category" });
 }
 
 //delete all admin categories
-export async function deleteDefaultCategories(req: Request, res: Response) {
+export async function deleteDefaultCategories(req: MyRequest, res: MyResponse) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
   try {
@@ -96,5 +108,3 @@ export async function deleteDefaultCategories(req: Request, res: Response) {
     throw Error(error.message);
   }
 }
-
-

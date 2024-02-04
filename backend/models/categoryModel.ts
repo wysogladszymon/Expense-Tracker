@@ -13,6 +13,10 @@ const categorySchema = new Schema({
         type:String,
         required: true,
         enum: ['default', 'user']
+    },
+    user_id:{
+        type:String,
+        required: true,
     }
 });
 

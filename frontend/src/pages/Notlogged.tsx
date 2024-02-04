@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Navbar, Money } from "../components";
+import { Navbar } from "../components";
 import { useThemeContext } from "../store/ThemeContext";
 
-interface HomeProps {}
+interface NotloggedProps {}
 
-export const Home: FC<HomeProps> = () => {
+export const Notlogged: FC<NotloggedProps> = () => {
   const { specifies } = useThemeContext();
   const { background } = specifies;
 
@@ -13,12 +13,9 @@ export const Home: FC<HomeProps> = () => {
       className={`w-screen h-screen transition-colors duration-200  ${background}`}
     >
       <Navbar pageName="Home Page" />
-
-
-      <div className="flex justify-center h-96">
-        <Money title='Earnings'></Money>
-        <Money className='ml-5' title='Expenses'></Money>
-      </div>
+      <h1 className="ml-5">Login Brother! </h1>
+      <p className='ml-5 left-3'>login: admin or admin2</p>
+      <p className='ml-5 left-3'>password: ABCabc123!</p>
     </div>
   );
 };

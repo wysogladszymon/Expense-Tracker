@@ -1,17 +1,17 @@
 import { User } from "../models/userModel";
-import { Request, Response } from "express";
+import { MyRequest, MyResponse } from "../types/Requests";;
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 dotenv.config();
 
-function createToken(_id: string) {
+export function createToken(_id: string) {
   const word: string = process.env.SECRET as string;
   return jwt.sign({ _id }, word, { expiresIn: "3d" });
 }
 //signs up user
-export async function signupUser(req: Request, res: Response) {
+export async function signupUser(req: MyRequest, res: MyResponse) {
   console.log("signup");
   const { email, password, username } = req.body;
 
@@ -29,7 +29,7 @@ export async function signupUser(req: Request, res: Response) {
 }
 
 //login user
-export async function loginUser(req: Request, res: Response) {
+export async function loginUser(req: MyRequest, res: MyResponse) {
   console.log("login");
   const { emailOrUsername, password } = req.body;
   try {
@@ -43,17 +43,17 @@ export async function loginUser(req: Request, res: Response) {
 }
 
 //delete user
-export async function deleteUser(req: Request, res: Response) {
+export async function deleteUser(req: MyRequest, res: MyResponse) {
   console.log("delete");
 }
 
 //update user
-export async function updateUser(req: Request, res: Response) {
+export async function updateUser(req: MyRequest, res: MyResponse) {
   console.log("update");
 }
 
 //clear all collections => required in testing
-export async function clearAllUsers(req: Request, res: Response) {
+export async function clearAllUsers(req: MyRequest, res: MyResponse) {
   const mongoUri: string = process.env.MONGO_URI as string;
 
   if (mongoose.connection.readyState === 1) console.log("Connected to MongoDB");
@@ -73,7 +73,7 @@ export async function clearAllUsers(req: Request, res: Response) {
 }
 
 //get all users
-export async function showAllUsers(req: Request, res: Response) {
+export async function showAllUsers(req: MyRequest, res: MyResponse) {
   //show all Users and sort them by alphabet
   const users = await User.find({}).sort({
     email: 1,

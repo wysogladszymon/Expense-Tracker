@@ -1,4 +1,4 @@
-# 💸 Expense Tracker 💸
+# 💸 Expense Tracker 💸 ... IN PROGRESS
 
 This application manages us to track our expenses and incomes. I decided to use <a href="#TechStack"> MERN stack</a> in this project. 
 
@@ -9,6 +9,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 <li>How to use React Hooks like: useCOntext, useState, useReducer, useRef, useEffect.</li>
 <li>I have understood how back-end communicates with front-end.</li>
 <li>Creating Schemas in Database.</li>
+<li>Working with Jsonwebtokens</li>
 </ul>
 
 ## Instalation

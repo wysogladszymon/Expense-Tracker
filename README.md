@@ -13,6 +13,16 @@ This application manages us to track our expenses and incomes. I decided to use 
 </ul>
 
 ## Instalation
+<ol>
+<li>Install Node.js 
+<ul>
+<li> On Linux type: ```sudo apt install node npm```</li>
+<li> On Windows visit: <a href="https://nodejs.org/en/download">Node.js</a></li>
+</ul>
+</li>
+
+<li>Install Node.js</li>
+</ol>
 
 ## <h1 id="TechStack">TECH STACK</h1>
 <div display="flex">

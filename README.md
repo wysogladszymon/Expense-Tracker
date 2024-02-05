@@ -12,14 +12,11 @@ This application manages us to track our expenses and incomes. I decided to use 
 <li>Working with Jsonwebtokens</li>
 </ul>
 
-## Instalation
-<ol>
-<li>Install Node.js 
-<ul>
-<li> On Linux type: </li>``` sudo apt install node npm ```
-<li> On Windows visit: <a href="https://nodejs.org/en/download">Node.js</a></li>
-</ul>
-</li>
+## Installation
+
+1. **Install Node.js**
+    - On Linux, type: `sudo apt install node npm`
+    - On Windows, visit: [Node.js](https://nodejs.org/en/download)
 
 <li>Install Node.js</li>
 </ol>

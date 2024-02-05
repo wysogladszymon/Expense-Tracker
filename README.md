@@ -15,7 +15,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 ## Installation
 
 1. **Install Node.js**
-    - On Linux, type: `sudo apt install node npm`
+    - On Linux, type: ```sudo apt install nodejs npm```
     - On Windows, visit: [Node.js](https://nodejs.org/en/download)
 
 <li>Install Node.js</li>

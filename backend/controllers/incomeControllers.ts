@@ -1,6 +1,5 @@
 import { Finanse } from "../models/finanseModel";
 import { MyRequest, MyResponse } from "../types/Requests";
-
 import mongoose from "mongoose";
 import { Category } from "../models/categoryModel";
 import { categoryExists } from "./categoryController";
@@ -55,7 +54,7 @@ export async function createIncome(req: MyRequest, res: MyResponse) {
   }
   let category: string = req.body.category;
   category = category && category.toLowerCase();
-
+  
   const categoryExists = await Category.find({category});
   if (!categoryExists) return res.status(400).json({message: "Category not found"});
   //add to dB

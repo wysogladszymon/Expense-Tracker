@@ -1,6 +1,6 @@
 export interface Finanse {
     title: string;
-    amount: Number;
+    amount: number;
     category: string;
     finanse: "expense" | "income";
     user_id: string;

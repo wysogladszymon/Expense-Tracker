@@ -22,6 +22,11 @@ app.use((req,res,next) => {
 //routes
 app.use("/api/auth", authRouter);
 
+app.use((req,res,next)=>{
+  console.log("req.body:",req.body);
+  next();
+})
+
 //middleware to check if user is logged
 app.use(requireAuth)
 

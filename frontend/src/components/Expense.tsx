@@ -25,11 +25,10 @@ export const Expense: FC<ExpenseProps> = ({
 }) => {
   const { input } = useThemeContext().specifies;
   amount = Number(amount);
-  const color = finanse === 'income' ? 'text-green-700' : 'text-red-900';
-  className = className || 'border-b-2';
+  const color = finanse === 'income' ? 'text-green-700' : 'text-red-600';
   return (
     <div
-      className={`${className} flex w-full h-10 content-center overflow-hidden ${input} `}
+      className={`${className} flex w-full h-10 content-center border-b-2  ${input} `}
       style={{ maxHeight: "300px" }}
     >
       <p className={`basis-2/12 text-xs text-center h-full ${input}`}>

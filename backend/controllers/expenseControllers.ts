@@ -24,13 +24,13 @@ export async function showExpense(req: MyRequest, res: MyResponse) {
 
   const { user } = req;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such Expense" });
+    return res.status(404).json({ message: "No such Expense" });
   }
   
   const expense = await Finanse.find({_id:id, user_id:user})
   expense
     ? res.status(200).json(expense)
-    : res.status(400).json({ error: "No such Expense" });
+    : res.status(400).json({ message: "No such Expense" });
 }
 
 //create expense
@@ -51,12 +51,12 @@ export async function createExpense(req: MyRequest, res: MyResponse) {
   category = category && category.toLowerCase();
 
   if (!categoryExists(category))
-    return res.status(400).json({ error: "Category doesn't exist" });
+    return res.status(400).json({ message: "Category doesn't exist" });
 
   if (emptyFields.length > 0) {
     return res
       .status(400)
-      .json({ error: "Please fill in all the fields", emptyFields });
+      .json({ message: "Please fill in all the fields", emptyFields });
   }
 
   //add to dB
@@ -66,25 +66,25 @@ export async function createExpense(req: MyRequest, res: MyResponse) {
       amount,
       finanse: "expense",
       category: category ? category : "other",
+      user_id:user,
     });
     res.status(200).json(expense);
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ message: error.message });
   }
 }
 
 //delete expense
 export async function deleteExpense(req: MyRequest, res: MyResponse) {
   const { id } = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such Expense" });
+    return res.status(404).json({ message: "No such Expense" });
   }
   const expense = await Finanse.findOneAndDelete({ _id: id });
 
   expense
-    ? res.status(200).json({ msg: "Expense deleted succesfully" })
-    : res.status(404).json({ error: "No such Expense" });
+    ? res.status(200).json({ message: "Expense deleted succesfully" })
+    : res.status(404).json({ message: "No such Expense" });
 }
 
 //update expense
@@ -92,14 +92,14 @@ export async function updateExpense(req: MyRequest, res: MyResponse) {
   const { id } = req.params;
   const category = req.body.categories;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such expense" });
+    return res.status(404).json({ message: "No such expense" });
   }
 
   const expense = await Finanse.findByIdAndUpdate(id, { ...req.params });
 
   expense
     ? res.status(404).json(expense)
-    : res.status(404).json({ error: "Failed to update" });
+    : res.status(404).json({ message: "Failed to update" });
 }
 
 //delete all expenses
@@ -109,7 +109,7 @@ export async function deleteAllExpenses(req: MyRequest, res: MyResponse) {
   try {
     await Finanse.deleteMany({ finanse: "expense" });
     console.log("Expenses deleted succesfully");
-    res.status(400).json({ msg: "Expenses deleted succesfully" });
+    res.status(400).json({ message: "Expenses deleted succesfully" });
   } catch (error: any) {
     console.log("Failed to delete all Expenses");
     throw Error(error.message);

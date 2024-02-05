@@ -25,3 +25,4 @@ export async function deleteFinanse(finanseType:'expense' | 'income',user:MyUser
       const data = await response.json();
       return data;
 }
+

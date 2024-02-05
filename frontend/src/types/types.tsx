@@ -7,3 +7,9 @@ export interface Finanse {
     updatedAt: string;
     _id:string;
 }
+
+export interface Category{
+    category: string;
+    user: 'default' | 'user';
+    user_id?:string;
+}

@@ -2,7 +2,6 @@ import { FC, ReactNode } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { format } from "date-fns";
 import { useThemeContext } from "../store/ThemeContext";
-import { Scrollbars } from "react-custom-scrollbars";
 
 interface ExpenseProps {
   children?: ReactNode;
@@ -11,22 +10,26 @@ interface ExpenseProps {
   category: string;
   amount: Number | string;
   finanse:string;
+  className?:string;
+  trashClick?: ()=> void;
 }
 
 export const Expense: FC<ExpenseProps> = ({
-  children,
   amount,
   category,
   title,
   date,
-  finanse
+  finanse,
+  className,
+  trashClick
 }) => {
   const { input } = useThemeContext().specifies;
   amount = Number(amount);
-  const color = finanse === 'income' ? 'text-green-700' : 'text-red-900'; 
+  const color = finanse === 'income' ? 'text-green-700' : 'text-red-900';
+  className = className || 'border-b-2';
   return (
     <div
-      className={`flex w-full h-10 border-b-2 content-center overflow-hidden`}
+      className={`${className} flex w-full h-10 content-center overflow-hidden ${input} `}
       style={{ maxHeight: "300px" }}
     >
       <p className={`basis-2/12 text-xs text-center h-full ${input}`}>
@@ -35,16 +38,19 @@ export const Expense: FC<ExpenseProps> = ({
       <p className={`pl-3 pt-2 basis-4/12 text-sm border-l-2 h-full ${input}`}>
         {title}
       </p>
-      <p className={`pl-3 pt-2 basis-3/12 text-sm border-l-2 h-full ${input}`}>
+      <p className={`pl-3 pt-2 basis-3/12 text-sm border-l-2 h-full border-r-2 ${input}`}>
         {category}
       </p>
-      <p className={`pl-3 pt-2 basis-2/12 text-sm border-l-2 h-full ${input} ${color}`}>
+      <p className={`pl-3 pt-2 basis-2/12 text-sm h-full ${color}`}>
         {String(amount.toFixed(2))}
       </p>
-      <RiDeleteBin6Line
+      {trashClick ? <RiDeleteBin6Line onClick={trashClick}
         className="pl-3 hover:cursor-pointer my-auto"
         size={30}
-      />
+      /> : <RiDeleteBin6Line
+      className="pl-3 hover:cursor-pointer my-auto"
+      size={30}
+    /> }
     </div>
   );
 };

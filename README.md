@@ -17,9 +17,15 @@ This application manages us to track our expenses and incomes. I decided to use 
 1. **Install Node.js**
     - On Linux, type: ```sudo apt install nodejs npm```
     - On Windows, visit: [Node.js](https://nodejs.org/en/download)
-
-<li>Install Node.js</li>
-</ol>
+2. **Clone my repository**
+    You can either download a zip or ```git clone ``` it.
+3. **Open terminal and go to folder of the project using ```cd```**
+4. **Go to backend folder and install all librarier**
+    ``` cd backend npm install```
+5. **Go to frontend server and install all libraries**
+    ``` cd frontend npm install```
+6. **Run two separate terminals one for drontend and one for backend and type in both**
+    ```npm run dev``` to run project in developers mode
 
 ## <h1 id="TechStack">TECH STACK</h1>
 <div display="flex">

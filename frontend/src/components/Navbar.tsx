@@ -3,6 +3,7 @@ import { useThemeContext } from "../store/ThemeContext";
 import { ToggleThemeButton } from "./ToggleThemeButton";
 import { useAuthContext } from "../store/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useFetchedDataContext } from "../store/FetchedDataContext";
 
 interface NavbarProps {
   pageName: string;
@@ -11,6 +12,8 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = ({ pageName }) => {
   const { header, button } = useThemeContext().specifies;
   const { user, dispatchLogin } = useAuthContext();
+  const {setCategories, setExpenses,setEarnings} = useFetchedDataContext();
+
   let userButton: String = "";
   const navigate = useNavigate();
 
@@ -29,6 +32,9 @@ export const Navbar: FC<NavbarProps> = ({ pageName }) => {
         navigate(`/signup`);
         break;
       case "Logout":
+        setEarnings([]);
+        setExpenses([]);
+        setCategories([]);
         dispatchLogin({ type: "LOGOUT", payload: null });
         break;
       default:

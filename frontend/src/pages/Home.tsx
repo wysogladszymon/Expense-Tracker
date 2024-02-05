@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { Navbar, Money, Expense } from "../components";
 import { useThemeContext } from "../store/ThemeContext";
 import { useAuthContext } from "../store/AuthContext";

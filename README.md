@@ -16,9 +16,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 <ol>
 <li>Install Node.js 
 <ul>
-<li> On Linux type: ```
-sudo apt install node npm
-```</li>
+<li> On Linux type: ``` sudo apt install node npm ```</li>
 <li> On Windows visit: <a href="https://nodejs.org/en/download">Node.js</a></li>
 </ul>
 </li>

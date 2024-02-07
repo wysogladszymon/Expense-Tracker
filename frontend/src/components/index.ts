@@ -5,3 +5,7 @@ export * from "./Error.tsx";
 export * from "./Money.tsx";
 export * from "./Expense.tsx";
 export * from "./User.tsx";
+export * from "./BarChart.tsx";
+export * from "./Charts.tsx";
+export * from "./LineChart.tsx";
+export * from "./PieChart.tsx";

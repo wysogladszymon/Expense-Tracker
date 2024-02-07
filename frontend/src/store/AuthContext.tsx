@@ -64,7 +64,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       dispatchLogin({ type: "LOGIN", payload: user });
     }
   }, []);
-  console.log(loginState.user);
   
   return (
     <AuthContext.Provider value={{ ...loginState, dispatchLogin }}>

@@ -51,6 +51,7 @@ export const Home: FC<HomeProps> = () => {
       <div className={` ${container} h-5/6 ml-10 mr-10 pl-10 pr-10 flex flex-col border-solid border-2 rounded-xl shadow-xl`}
       style={{width:"calculate(100%-20px)"}}>
         <User balance={expenseSum + incomeSum}></User>
+
         <div className="flex justify-center h-96">
           <Money
             categories={categories}

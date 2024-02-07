@@ -6,6 +6,7 @@ export interface Finanse {
     user_id: string;
     updatedAt: string;
     _id:string;
+    createdAt:string;
 }
 
 export interface Category{

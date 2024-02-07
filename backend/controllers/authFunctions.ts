@@ -20,7 +20,7 @@ export async function signupUser(req: MyRequest, res: MyResponse) {
     const user = await User.signup(email, password, username);
 
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, username });
   } catch (error: any) {
     console.log(error.message);
     // throw error;
@@ -36,7 +36,7 @@ export async function loginUser(req: MyRequest, res: MyResponse) {
     const user = await User.login(emailOrUsername, password);
 
     const token = createToken(user._id);
-    res.status(200).json({ email: user.email, token: token });
+    res.status(200).json({ email: user.email, token: token, username:user.username });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }

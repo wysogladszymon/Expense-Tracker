@@ -70,7 +70,7 @@ export const Money: FC<MoneyProps> = ({
   }
   return (
     <div
-      className={`${className} ${container} flex flex-col w-1/2 h-5/6 border-solid border-2 relative rounded-s rounded-e p5`}
+      className={`${className} ${container} flex flex-col w-1/2 h-5/6 border-solid border-2 relative rounded-s rounded-e `}
     >
       <div className={`flex border-0 border-b-2 ${headerStyle}`}>
         <h1 className={`pl-6 pb-4  basis-8/12 pt-4 text-xl `}>
@@ -161,25 +161,25 @@ export const Money: FC<MoneyProps> = ({
       </div>
       {/* titles */}
       <div
-        className={` flex w-full h-6 content-center border-b-2  overflow-hidden ${input} `}
+        className={` flex w-full h-7 content-center border-b-2  overflow-hidden ${input} `}
       >
         <p
-          className={`basis-2/12 text-xs text-center h-5 text-gray-400 ${input}`}
+          className={`basis-2/12 text-xs text-center h-7 text-gray-400 ${input}`}
         >
           date
         </p>
         <p
-          className={` basis-4/12 text-xs text-center border-l-2 h-5 text-gray-400 ${input}`}
+          className={` basis-4/12 text-xs text-center border-l-2 h-7 text-gray-400 ${input}`}
         >
           title
         </p>
         <p
-          className={` basis-3/12 text-xs text-center border-l-2 h-5 border-r-2 text-gray-400 ${input}`}
+          className={` basis-3/12 text-xs text-center border-l-2 h-7 border-r-2 text-gray-400 ${input}`}
         >
           category
         </p>
         <p
-          className={` basis-3/12 text-xs text-center h-5 text-gray-400 ${input}`}
+          className={` basis-3/12 text-xs text-center h-7 text-gray-400 ${input}`}
         >
           amount
         </p>

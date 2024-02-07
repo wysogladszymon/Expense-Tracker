@@ -7,12 +7,15 @@ import {
   useEffect,
   useContext,
 } from "react";
+export interface iUser{
+  email:string;
+  token:string;
+  username:string;
+} 
 
+type User = iUser | null;
 export interface AuthContextInterface {
-  user: {
-    email: string;
-    token: string;
-  } | null;
+  user: User
   dispatchLogin: Dispatch<useReducerActionInterface>;
 }
 
@@ -23,18 +26,12 @@ export interface AuthContextProviderProps {
 }
 
 export interface useReducerStateInterface {
-  user: {
-    email: string;
-    token: string;
-  } | null;
+  user: User
 }
 
 export interface useReducerActionInterface {
   type: string;
-  payload: {
-    email: string;
-    token: string;
-  } | null;
+  payload: User;
 }
 
 export const authReducer = (
@@ -59,15 +56,15 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     user: null,
   } as useReducerStateInterface);
 
-  // useEffect(() => {
-  //   const userString = localStorage.getItem("user");
-  //   const user = userString ? JSON.parse(userString) : null;
+  useEffect(() => {
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
 
-  //   if (user) {
-  //     dispatchLogin({ type: "LOGIN", payload: user });
-  //   }
-  // }, []);
-  // console.log(loginState.user);
+    if (user) {
+      dispatchLogin({ type: "LOGIN", payload: user });
+    }
+  }, []);
+  console.log(loginState.user);
   
   return (
     <AuthContext.Provider value={{ ...loginState, dispatchLogin }}>

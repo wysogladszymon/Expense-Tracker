@@ -1,4 +1,4 @@
-# 💸 Expense Tracker 💸 ... IN PROGRESS
+# 💸 Expense Tracker 💸 
 
 This application manages us to track our expenses and incomes. I decided to use <a href="#TechStack"> MERN stack</a> in this project. 
 

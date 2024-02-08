@@ -32,6 +32,28 @@ This application manages us to track our expenses and incomes. I decided to use 
 
     ```npm run dev``` to run project in developers mode
 
+## Folder structure
+```
+├── backend/
+│ ├── controllers/
+│ ├── models/
+│ ├── node_modules/
+│ ├── routes/
+│ ├── types/
+│ ├── validations/
+│ ├── server.ts
+└── frontend/
+├── node_modules/
+├── src/
+│ ├── assets/
+│ ├── components/
+│ ├── pages/
+│ ├── store/
+│ ├── types/
+│ ├── App.tsx
+│ └── main.tsx
+```
+
 ## <h1 id="TechStack">TECH STACK</h1>
 <div display="flex">
 <a href="https://nodejs.org/en" title="Node.js"><img src="https://github.com/get-icon/geticon/blob/master/icons/nodejs-icon.svg" alt="Node.js" width="50px" height="50px"></a> 
@@ -41,3 +63,11 @@ This application manages us to track our expenses and incomes. I decided to use 
 <a href="https://expressjs.com" title="Express.js"><img src="https://github.com/get-icon/geticon/blob/master/icons/express.svg" alt="Express.js" height="50px"></a>
 <a href="https://tailwindcss.com" title="Tailwindcss"><img src="https://github.com/get-icon/geticon/raw/master/icons/tailwindcss-icon.svg" alt="Tailwind CSS" height="50px"></a>
 </div>
+
+## Photos
+![github](https://github.com/wysogladszymon/Expense-Tracker/assets/128485360/a7708cff-940d-4f45-b166-8fc0227874d0)
+
+![inc](https://github.com/wysogladszymon/Expense-Tracker/assets/128485360/cd7672fa-df83-4893-b820-33cbfac459fb)
+
+![login](https://github.com/wysogladszymon/Expense-Tracker/assets/128485360/8d9864f8-aaff-4dc1-9583-4d77e36b4543)
+

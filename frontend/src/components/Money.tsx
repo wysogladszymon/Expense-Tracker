@@ -41,9 +41,11 @@ export const Money: FC<MoneyProps> = ({
         amount = incomes.amount;
         myTitle = incomes.title;
       }
-      console.log(category, amount, myTitle, categories);
+      console.log(category, amount, myTitle);
+      const cats = categories.map((cat)=>cat.category);
+      console.log(cats);
       
-      if ( amount > 0 && myTitle !== ''){
+      if ( amount > 0 && myTitle !== '' && cats.includes(category)){
         console.log("elo");
         
         const ask = title === 'Expenses' ? 'expense' : 'income';
@@ -129,7 +131,7 @@ export const Money: FC<MoneyProps> = ({
           <option value="----select category----">
             ----select category----
           </option>
-          {categories?.map((cat, index) => (
+          {categories?.map((cat, index) => ( cat.category !=='other' &&
             <option
               key={index}
               className={`cursor-pointer `}
@@ -138,6 +140,9 @@ export const Money: FC<MoneyProps> = ({
               {cat.category}
             </option>
           ))}
+          <option value="other">
+            other
+          </option>
         </select>
         <input
           value={title === "Expenses" ? expenses.amount : incomes.amount}

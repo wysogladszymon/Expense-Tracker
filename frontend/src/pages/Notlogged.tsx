@@ -14,7 +14,7 @@ export const Notlogged: FC<NotloggedProps> = () => {
     >
       <Navbar pageName="Home Page" />
       <h1 className="ml-5">Login Brother! </h1>
-      <p className='ml-5 left-3'>login: admin or admin2</p>
+      <p className='ml-5 left-3'>login: admin</p>
       <p className='ml-5 left-3'>password: ABCabc123!</p>
     </div>
   );

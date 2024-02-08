@@ -42,7 +42,6 @@ export const User: FC<UserProps> = ({ balance }) => {
           {balance.toFixed(2)}
         </p>
       </div>
-      
         <Charts />
     </div>
   );

@@ -6,10 +6,11 @@ This application manages us to track our expenses and incomes. I decided to use 
 <ul>
 <li>Why writing code in Typescript is better than in regular Javascript.</li>
 <li>How to use and create own interfaces and types. </li>
-<li>How to use React Hooks like: useCOntext, useState, useReducer, useRef, useEffect.</li>
+<li>How to use React Hooks like: useContext, useState, useReducer, useRef, useEffect.</li>
 <li>I have understood how back-end communicates with front-end.</li>
 <li>Creating Schemas in Database.</li>
 <li>Working with Jsonwebtokens</li>
+<li>Working with react-chartjs-2</li>
 </ul>
 
 ## Installation

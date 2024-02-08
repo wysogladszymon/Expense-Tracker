@@ -14,11 +14,10 @@ import {
 } from "../store/";
 
 interface ChartsProps {
-  children?: ReactNode;
   className?: string;
 }
 
-export const Charts: FC<ChartsProps> = ({ children, className }) => {
+export const Charts: FC<ChartsProps> = ({ className }) => {
   const today = new Date();
   const { expenses, earnings, categories } = useFetchedDataContext();
   const { theme } = useThemeContext();
@@ -227,8 +226,8 @@ export const Charts: FC<ChartsProps> = ({ children, className }) => {
   }, [expenses, earnings, theme]);
 
   return (
-    <div style={{ height: "300px" }} className={`flex ml-36`}>
-      <div className="w-56 h-12 mr-10 mt-10 mb-10 ml-10">
+    <div style={{ height: "300px" }} className={`flex ml-52`}>
+      <div className="w-56 h-12 mr-24 mt-auto mb-auto ml-10">
         <label htmlFor="chartSelect">Choose chart</label>
         <select
           id="chartSelect"
@@ -268,7 +267,7 @@ export const Charts: FC<ChartsProps> = ({ children, className }) => {
       </div>
       <div
         className={`${className} ml-auto mr-auto overflow-hidden`}
-        style={{ height: "300px", width: "400px" }}
+        style={{ height: "400px", width: "650px" }}
       >
         {chart}
       </div>

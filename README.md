@@ -1,6 +1,6 @@
 # 💸 Expense Tracker 💸 
 
-This application manages us to track our expenses and incomes. I decided to use <a href="#TechStack"> MERN stack</a> in this project. 
+This application allows us to track our expenses and incomes. I decided to use <a href="#TechStack"> MERN stack</a> in this project. 
 
 ## What I have learned:
 <ul>
@@ -11,7 +11,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 <li>Creating Schemas in Database.</li>
 <li>Working with Jsonwebtokens</li>
 <li>Working with react-chartjs-2</li>
-<li>Using Tailwind wich sometimes fastens work</>
+<li>Using Tailwind which sometimes fastens work</>
 </ul>
 
 ## Installation
@@ -23,13 +23,15 @@ This application manages us to track our expenses and incomes. I decided to use 
 
     You can either download a zip or ```git clone``` it.
 3. **Open terminal and go to folder of the project using ```cd```**
-4. **Go to backend folder and install all librarier**
+4. **Go to backend folder and install all libraries**
 
     ```cd backend npm install```
-5. **Go to frontend server and install all libraries**
+   (On windows you will probably also need ```npm rebuild bcrypt --build-from-source```).
+
+6. **Go to frontend server and install all libraries**
 
     ```cd frontend npm install```
-6. **Run two separate terminals one for drontend and one for backend and type in both**
+7. **Run two separate terminals one for drontend and one for backend and type in both**
 
     ```npm run dev``` to run project in developers mode
 

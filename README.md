@@ -11,6 +11,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 <li>Creating Schemas in Database.</li>
 <li>Working with Jsonwebtokens</li>
 <li>Working with react-chartjs-2</li>
+<li>Using Tailwind wich sometimes fastens work</>
 </ul>
 
 ## Installation

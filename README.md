@@ -23,7 +23,7 @@ This application manages us to track our expenses and incomes. I decided to use 
 
     You can either download a zip or ```git clone``` it.
 3. **Open terminal and go to folder of the project using ```cd```**
-4. **Go to backend folder and install all librarier**
+4. **Go to backend folder and install all libraries**
 
     ```cd backend npm install```
 5. **Go to frontend server and install all libraries**
